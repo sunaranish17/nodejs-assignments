@@ -1,15 +1,15 @@
 const Article = require('../models/article');
 
 exports.getComments = (req, res) => {
-    Article.find({})
+    Article.find({ _id: req.params.articleId })
         .exec((error, articles) => {
-            if (error) return res.status(400).json({ error });
+        if (error) return res.status(400).json({ error });
 
-            if (articles) {
-                const comments = articles.comments;
-                return res.status(200).json({ comments });
-            }
-        });
+        if (articles) {
+            const comments = articles.comments;
+            return res.status(200).json({ comments });
+        }
+    });
 };
 
 exports.getArticle = (req, res) => {
